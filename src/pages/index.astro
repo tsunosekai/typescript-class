@@ -58,6 +58,27 @@ const sortedLessons = lessons.sort((a, b) => a.data.lesson - b.data.lesson);
       ))}
     </div>
   </section>
+
+  <section class="contribute">
+    <h2>ご協力のお願い</h2>
+    <div class="contribute-content">
+      <p>この講座はまだ作成中です。以下のご協力をお待ちしています！</p>
+
+      <div class="contribute-cards">
+        <a href="https://github.com/tsunosekai/typescript-class/issues/new?template=screenshot.md" class="contribute-card" target="_blank">
+          <span class="contribute-icon">📸</span>
+          <span class="contribute-title">スクリーンショットの提供</span>
+          <span class="contribute-desc">現在プレースホルダー画像になっている箇所の実際のスクリーンショットを募集しています</span>
+        </a>
+
+        <a href="https://github.com/tsunosekai/typescript-class/issues/new?template=feedback.md" class="contribute-card" target="_blank">
+          <span class="contribute-icon">💬</span>
+          <span class="contribute-title">フィードバック</span>
+          <span class="contribute-desc">わかりにくい箇所、間違っている箇所、改善案などを教えてください</span>
+        </a>
+      </div>
+    </div>
+  </section>
 </BaseLayout>
 
 <style>
@@ -194,5 +215,65 @@ const sortedLessons = lessons.sort((a, b) => a.data.lesson - b.data.lesson);
   .lesson-title {
     font-weight: 500;
     color: #1e293b;
+  }
+
+  .contribute {
+    margin-top: 3rem;
+    padding-top: 2rem;
+    border-top: 1px solid #e2e8f0;
+  }
+
+  .contribute h2 {
+    text-align: center;
+    margin-bottom: 1rem;
+  }
+
+  .contribute-content > p {
+    text-align: center;
+    color: #64748b;
+    margin-bottom: 1.5rem;
+  }
+
+  .contribute-cards {
+    display: grid;
+    grid-template-columns: repeat(auto-fit, minmax(280px, 1fr));
+    gap: 1rem;
+  }
+
+  .contribute-card {
+    display: flex;
+    flex-direction: column;
+    padding: 1.5rem;
+    background-color: #f8fafc;
+    border: 1px solid #e2e8f0;
+    border-radius: 12px;
+    text-decoration: none;
+    color: inherit;
+    transition: all 0.2s;
+  }
+
+  .contribute-card:hover {
+    background-color: #f1f5f9;
+    border-color: #cbd5e1;
+    transform: translateY(-2px);
+    box-shadow: 0 4px 12px rgba(0,0,0,0.1);
+  }
+
+  .contribute-icon {
+    font-size: 2rem;
+    margin-bottom: 0.75rem;
+  }
+
+  .contribute-title {
+    font-weight: 600;
+    font-size: 1.1rem;
+    color: #1e293b;
+    margin-bottom: 0.5rem;
+  }
+
+  .contribute-desc {
+    font-size: 0.9rem;
+    color: #64748b;
+    line-height: 1.6;
   }
 </style>
