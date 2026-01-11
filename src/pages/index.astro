@@ -47,18 +47,6 @@ const sortedLessons = lessons.sort((a, b) => a.data.lesson - b.data.lesson);
     </div>
   </section>
 
-  <section class="lessons">
-    <h2>カリキュラム</h2>
-    <div class="lesson-grid">
-      {sortedLessons.map((lesson) => (
-        <a href={`/lessons/${lesson.slug}`} class="lesson-card">
-          <span class="lesson-number">第{lesson.data.lesson}回</span>
-          <span class="lesson-title">{lesson.data.title}</span>
-        </a>
-      ))}
-    </div>
-  </section>
-
   <section class="contribute">
     <h2>ご協力のお願い</h2>
     <div class="contribute-content">
@@ -77,6 +65,18 @@ const sortedLessons = lessons.sort((a, b) => a.data.lesson - b.data.lesson);
           <span class="contribute-desc">わかりにくい箇所、間違っている箇所、改善案などを教えてください</span>
         </a>
       </div>
+    </div>
+  </section>
+
+  <section class="lessons">
+    <h2>カリキュラム</h2>
+    <div class="lesson-grid">
+      {sortedLessons.map((lesson) => (
+        <a href={`/lessons/${lesson.slug}`} class="lesson-card">
+          <span class="lesson-number">第{lesson.data.lesson}回</span>
+          <span class="lesson-title">{lesson.data.title}</span>
+        </a>
+      ))}
     </div>
   </section>
 </BaseLayout>
@@ -218,9 +218,7 @@ const sortedLessons = lessons.sort((a, b) => a.data.lesson - b.data.lesson);
   }
 
   .contribute {
-    margin-top: 3rem;
-    padding-top: 2rem;
-    border-top: 1px solid #e2e8f0;
+    margin-bottom: 2rem;
   }
 
   .contribute h2 {
