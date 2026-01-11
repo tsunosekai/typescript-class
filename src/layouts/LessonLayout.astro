@@ -158,10 +158,20 @@ const lessonPadded = String(lesson).padStart(2, '0');
     }
   });
 
-  // 各セクションの末尾にフィードバックリンクを追加
-  const headings = document.querySelectorAll('.lesson-content h2, .lesson-content h3');
-  headings.forEach((heading, index) => {
-    const sectionTitle = heading.textContent || '';
+  // 各セクションの末尾（hrの上）にフィードバックリンクを追加
+  document.querySelectorAll('.lesson-content hr').forEach((hr) => {
+    // hrの直前の見出しを探す
+    let prev = hr.previousElementSibling;
+    let sectionTitle = '';
+    while (prev) {
+      if (prev.tagName === 'H2' || prev.tagName === 'H3') {
+        sectionTitle = prev.textContent || '';
+        break;
+      }
+      prev = prev.previousElementSibling;
+    }
+    if (!sectionTitle) return;
+
     const issueTitle = encodeURIComponent(`[フィードバック] 第${lesson}回 - ${sectionTitle}`);
     const issueBody = encodeURIComponent(`## 該当箇所
 
@@ -184,15 +194,9 @@ const lessonPadded = String(lesson).padStart(2, '0');
     link.href = `https://github.com/tsunosekai/typescript-class/issues/new?title=${issueTitle}&body=${issueBody}&labels=feedback`;
     link.className = 'feedback-link';
     link.target = '_blank';
-    link.textContent = '💬 この部分がわかりにくい';
+    link.textContent = '分かりにくかった部分を報告';
     wrapper.appendChild(link);
 
-    // 次の見出しの直前、またはコンテンツ末尾に挿入
-    const nextHeading = headings[index + 1];
-    if (nextHeading) {
-      nextHeading.parentNode?.insertBefore(wrapper, nextHeading);
-    } else {
-      document.querySelector('.lesson-content')?.appendChild(wrapper);
-    }
+    hr.parentNode?.insertBefore(wrapper, hr);
   });
 </script>
