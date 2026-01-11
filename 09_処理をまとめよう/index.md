@@ -1,0 +1,409 @@
+# 第9回: 処理をまとめよう（関数）
+
+<details>
+<summary>💡 AIに質問するときはここをクリック</summary>
+
+ChatGPTやClaudeなどのAIに質問するときは、以下をコピーして最初に貼り付けてね！
+
+```
+【TypeScript講座 学習状況】
+現在地: 第9回「処理をまとめよう（関数）」
+
+■ 学習済みの内容:
+- VSCode、ターミナル、Node.js/TypeScript環境
+- HTML/CSSの基本、Flexbox
+- TypeScriptの変数と型（let, const, string, number, boolean）
+- if文と条件分岐:
+  - 比較演算子（===, !==, <, >, <=, >=）
+  - else, else if
+  - 論理演算子（&&, ||, !）
+  - Math.random(), Math.floor()
+- 【作品①】自己紹介ページ
+- おみくじプログラム
+
+■ まだ習っていない内容:
+配列、オブジェクト、DOM操作、イベント処理、React など
+
+上記の学習状況を踏まえて、初心者にも分かるように答えてください。
+まだ習っていない概念は使わないでください。
+
+【質問】
+ここに質問を書いてね
+```
+
+</details>
+
+> **この回で学ぶこと**
+> - 関数とは何か
+> - 関数の作り方
+> - 引数と戻り値
+> - 型を付けた関数
+> - アロー関数
+
+---
+
+## はじめに
+
+前回、if文で条件分岐を学びました。
+
+今回は「**関数**」を学びます。
+
+関数を使うと、同じ処理を何度も書かなくてよくなります！
+
+---
+
+## STEP 1: VSCodeでプロジェクトを開く
+
+### 1-1. VSCodeを起動する
+
+デスクトップのVSCodeアイコンをダブルクリックして、VSCodeを起動します。
+
+### 1-2. プロジェクトフォルダを開く
+
+**「ファイル」→「フォルダーを開く」** から、`typescript-lesson` フォルダを開きます。
+
+### 1-3. ターミナルを開く
+
+**「ターミナル」→「新しいターミナル」** をクリック
+
+---
+
+## STEP 2: 新しいファイルを作る
+
+左側の「新しいファイル」アイコンをクリックして、`functions.ts` と入力します。
+
+---
+
+## 関数とは？
+
+**関数**とは、「**処理をまとめて名前をつけたもの**」です。
+
+例えば、挨拶を表示する処理を何度も書くのは面倒ですよね：
+
+```typescript
+console.log("こんにちは！");
+console.log("今日もいい天気ですね！");
+
+// また同じことを書く…
+console.log("こんにちは！");
+console.log("今日もいい天気ですね！");
+```
+
+これを関数にまとめると：
+
+```typescript
+// 1回定義すれば
+function greet() {
+    console.log("こんにちは！");
+    console.log("今日もいい天気ですね！");
+}
+
+// 何度でも呼び出せる
+greet();
+greet();
+```
+
+---
+
+## STEP 3: 最初の関数を作ろう
+
+### 3-1. 関数を定義する
+
+`functions.ts` に以下を入力します：
+
+```typescript
+function sayHello() {
+    console.log("Hello!");
+}
+```
+
+これが「関数の定義」です。この時点ではまだ何も実行されません。
+
+### 3-2. 関数を呼び出す
+
+定義した関数を実行するには、「呼び出す」必要があります：
+
+```typescript
+function sayHello() {
+    console.log("Hello!");
+}
+
+// 関数を呼び出す
+sayHello();
+```
+
+**`Ctrl + S`** で保存して実行：
+
+```
+npx ts-node functions.ts
+```
+
+結果：
+```
+Hello!
+```
+
+---
+
+## STEP 4: 引数を使う
+
+関数に「**引数（ひきすう）**」を渡すと、より柔軟な処理ができます。
+
+```typescript
+function greet(name: string) {
+    console.log(`こんにちは、${name}さん！`);
+}
+
+greet("山田");
+greet("佐藤");
+greet("田中");
+```
+
+**`Ctrl + S`** で保存して実行：
+
+```
+こんにちは、山田さん！
+こんにちは、佐藤さん！
+こんにちは、田中さん！
+```
+
+`name` が**引数**です。関数を呼び出すときに値を渡します。
+
+### 複数の引数
+
+引数は複数持つことができます：
+
+```typescript
+function introduce(name: string, age: number) {
+    console.log(`私は${name}、${age}歳です。`);
+}
+
+introduce("山田太郎", 16);
+introduce("佐藤花子", 17);
+```
+
+---
+
+## STEP 5: 戻り値を使う
+
+関数は「**戻り値（もどりち）**」を返すことができます。
+
+```typescript
+function add(a: number, b: number): number {
+    return a + b;
+}
+
+const result = add(5, 3);
+console.log(result);  // 8
+```
+
+- `return` → 値を返す
+- `: number`（関数名の後ろ）→ 戻り値の型
+
+### 戻り値を使った例
+
+```typescript
+function isAdult(age: number): boolean {
+    return age >= 18;
+}
+
+const myAge = 16;
+
+if (isAdult(myAge)) {
+    console.log("成人です");
+} else {
+    console.log("未成年です");
+}
+```
+
+関数の戻り値を、そのままif文の条件に使えます！
+
+---
+
+## STEP 6: 関数の型を理解する
+
+TypeScriptでは、関数にも型を付けます：
+
+```typescript
+function add(a: number, b: number): number {
+    return a + b;
+}
+```
+
+分解すると：
+
+| 部分 | 意味 |
+|------|------|
+| `a: number` | 引数aはnumber型 |
+| `b: number` | 引数bはnumber型 |
+| `): number` | 戻り値はnumber型 |
+
+### 戻り値がない場合
+
+戻り値がない関数は `: void` を使います：
+
+```typescript
+function showMessage(message: string): void {
+    console.log(message);
+    // returnがない = 戻り値なし
+}
+```
+
+> **`void` とは？**
+> 「何も返さない」という意味です。`console.log()` で表示するだけで、計算結果などを返さない関数に使います。
+> 省略しても動きますが、「この関数は値を返しません」と明示するために書くことが多いです。
+
+---
+
+## STEP 7: アロー関数
+
+関数には、もうひとつの書き方があります。「**アロー関数**」です。
+
+### 通常の関数
+
+```typescript
+function add(a: number, b: number): number {
+    return a + b;
+}
+```
+
+### アロー関数
+
+```typescript
+const add = (a: number, b: number): number => {
+    return a + b;
+};
+```
+
+`=>` の形が矢印（アロー）に見えるので「アロー関数」と呼びます。
+
+### 短く書けるパターン
+
+処理が1行の場合、さらに短く書けます：
+
+```typescript
+const add = (a: number, b: number): number => a + b;
+```
+
+`{}` と `return` を省略できます。
+
+---
+
+## STEP 8: 実践してみよう
+
+学んだことを使って、いくつかの関数を作ってみましょう。
+
+`functions.ts` を書き換えます：
+
+```typescript
+// 1. 挨拶する関数
+function greet(name: string): void {
+    console.log(`こんにちは、${name}さん！`);
+}
+
+// 2. 足し算する関数
+const add = (a: number, b: number): number => a + b;
+
+// 3. 偶数かどうか判定する関数
+// % は「割り算の余り」を求める演算子です
+// 例: 4 % 2 = 0（4÷2=2 余り0）、7 % 2 = 1（7÷2=3 余り1）
+// 余りが0なら偶数、1なら奇数
+function isEven(num: number): boolean {
+    return num % 2 === 0;
+}
+
+// 4. 税込み価格を計算する関数
+function calculateTax(price: number, taxRate: number = 0.1): number {
+    return price * (1 + taxRate);
+}
+
+// 関数を使ってみる
+console.log("=== 関数のテスト ===");
+console.log("");
+
+greet("山田");
+greet("佐藤");
+console.log("");
+
+console.log(`5 + 3 = ${add(5, 3)}`);
+console.log(`10 + 20 = ${add(10, 20)}`);
+console.log("");
+
+console.log(`4は偶数？ ${isEven(4)}`);
+console.log(`7は偶数？ ${isEven(7)}`);
+console.log("");
+
+console.log(`1000円の税込み: ${calculateTax(1000)}円`);
+console.log(`1000円の税込み(8%): ${calculateTax(1000, 0.08)}円`);
+```
+
+**`Ctrl + S`** で保存して実行：
+
+```
+npx ts-node functions.ts
+```
+
+結果：
+```
+=== 関数のテスト ===
+
+こんにちは、山田さん！
+こんにちは、佐藤さん！
+
+5 + 3 = 8
+10 + 20 = 30
+
+4は偶数？ true
+7は偶数？ false
+
+1000円の税込み: 1100円
+1000円の税込み(8%): 1080円
+```
+
+---
+
+## デフォルト引数
+
+上の例で使った `taxRate: number = 0.1` は「**デフォルト引数**」です。
+
+引数を省略した場合に使われる値を設定できます。
+
+```typescript
+function greet(name: string = "ゲスト"): void {
+    console.log(`こんにちは、${name}さん！`);
+}
+
+greet("山田");  // こんにちは、山田さん！
+greet();        // こんにちは、ゲストさん！
+```
+
+---
+
+## まとめ
+
+この回でやったこと：
+
+- ✅ 関数とは「処理をまとめて名前をつけたもの」
+- ✅ `function 名前() { }` で関数を定義
+- ✅ 引数で値を受け取れる
+- ✅ `return` で値を返せる
+- ✅ アロー関数 `() => { }` も使える
+- ✅ デフォルト引数で初期値を設定できる
+
+---
+
+## 次回予告
+
+次回は「**データをまとめて扱おう（配列）**」です。
+
+複数のデータを1つにまとめて管理する「配列」を学びます。じゃんけんゲームへの準備です！
+
+---
+
+## 練習問題（やってみよう）
+
+1. 名前と年齢を受け取って自己紹介を表示する関数を作ってみよう
+2. 2つの数を受け取って、大きい方を返す関数を作ってみよう
+3. 引数で受け取った数が3の倍数かどうかを返す関数を作ってみよう
+
+保存（`Ctrl + S`）を忘れずに！

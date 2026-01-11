@@ -1,0 +1,94 @@
+---
+import BaseLayout from './BaseLayout.astro';
+
+interface Props {
+  title: string;
+  lesson: number;
+}
+
+const { title, lesson } = Astro.props;
+const prevLesson = lesson > 1 ? String(lesson - 1).padStart(2, '0') : null;
+const nextLesson = lesson < 18 ? String(lesson + 1).padStart(2, '0') : null;
+---
+
+<BaseLayout title={`第${lesson}回: ${title}`}>
+  <article>
+    <div class="lesson-header">
+      <span class="lesson-number">第{lesson}回</span>
+      <h1>{title}</h1>
+    </div>
+
+    <div class="lesson-content">
+      <slot />
+    </div>
+
+    <nav class="lesson-nav">
+      {prevLesson && (
+        <a href={`/lessons/${prevLesson}`} class="nav-prev">
+          ← 前の回へ
+        </a>
+      )}
+      <a href="/" class="nav-home">目次に戻る</a>
+      {nextLesson && (
+        <a href={`/lessons/${nextLesson}`} class="nav-next">
+          次の回へ →
+        </a>
+      )}
+    </nav>
+  </article>
+</BaseLayout>
+
+<style>
+  .lesson-header {
+    margin-bottom: 2rem;
+  }
+
+  .lesson-number {
+    display: inline-block;
+    background-color: #2563eb;
+    color: white;
+    padding: 0.25rem 0.75rem;
+    border-radius: 9999px;
+    font-size: 0.875rem;
+    font-weight: bold;
+    margin-bottom: 0.5rem;
+  }
+
+  .lesson-header h1 {
+    margin-top: 0.5rem;
+    border-bottom: none;
+  }
+
+  .lesson-nav {
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+    gap: 1rem;
+    margin-top: 3rem;
+    padding-top: 2rem;
+    border-top: 1px solid #e2e8f0;
+  }
+
+  .lesson-nav a {
+    padding: 0.75rem 1.5rem;
+    background-color: #f1f5f9;
+    border-radius: 8px;
+    text-decoration: none;
+    color: #334155;
+    font-weight: 500;
+    transition: background-color 0.2s;
+  }
+
+  .lesson-nav a:hover {
+    background-color: #e2e8f0;
+  }
+
+  .nav-home {
+    background-color: #2563eb !important;
+    color: white !important;
+  }
+
+  .nav-home:hover {
+    background-color: #1d4ed8 !important;
+  }
+</style>
