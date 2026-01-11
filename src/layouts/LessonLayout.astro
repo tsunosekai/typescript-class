@@ -111,21 +111,22 @@ const lessonPadded = String(lesson).padStart(2, '0');
     background-color: #fde68a;
   }
 
+  .feedback-link-wrapper {
+    display: flex;
+    justify-content: flex-end;
+    margin-bottom: 1rem;
+  }
+
   .feedback-link {
-    margin-left: 1rem;
-    padding: 0.2rem 0.6rem;
-    background-color: #f1f5f9;
-    border-radius: 4px;
-    font-size: 0.75rem;
-    font-weight: normal;
-    color: #64748b;
+    padding: 0.2rem 0.5rem;
+    font-size: 0.7rem;
+    color: #94a3b8;
     text-decoration: none;
-    vertical-align: middle;
   }
 
   .feedback-link:hover {
-    background-color: #e2e8f0;
-    color: #475569;
+    color: #64748b;
+    text-decoration: underline;
   }
 </style>
 
@@ -157,8 +158,9 @@ const lessonPadded = String(lesson).padStart(2, '0');
     }
   });
 
-  // 各セクションにフィードバックリンクを追加
-  document.querySelectorAll('.lesson-content h2, .lesson-content h3').forEach((heading) => {
+  // 各セクションの末尾にフィードバックリンクを追加
+  const headings = document.querySelectorAll('.lesson-content h2, .lesson-content h3');
+  headings.forEach((heading, index) => {
     const sectionTitle = heading.textContent || '';
     const issueTitle = encodeURIComponent(`[フィードバック] 第${lesson}回 - ${sectionTitle}`);
     const issueBody = encodeURIComponent(`## 該当箇所
@@ -176,11 +178,21 @@ const lessonPadded = String(lesson).padStart(2, '0');
 ### どうすればわかりやすくなる？（任意）
 <!-- 改善案があれば -->
 `);
+    const wrapper = document.createElement('div');
+    wrapper.className = 'feedback-link-wrapper';
     const link = document.createElement('a');
     link.href = `https://github.com/tsunosekai/typescript-class/issues/new?title=${issueTitle}&body=${issueBody}&labels=feedback`;
     link.className = 'feedback-link';
     link.target = '_blank';
-    link.textContent = '💬 わかりにくい点を報告';
-    heading.appendChild(link);
+    link.textContent = '💬 この部分がわかりにくい';
+    wrapper.appendChild(link);
+
+    // 次の見出しの直前、またはコンテンツ末尾に挿入
+    const nextHeading = headings[index + 1];
+    if (nextHeading) {
+      nextHeading.parentNode?.insertBefore(wrapper, nextHeading);
+    } else {
+      document.querySelector('.lesson-content')?.appendChild(wrapper);
+    }
   });
 </script>
