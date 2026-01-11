@@ -11,7 +11,7 @@ interface Props {
 
 const { title, lesson, goal, time, checklist } = Astro.props;
 const prevLesson = lesson > 1 ? String(lesson - 1).padStart(2, '0') : null;
-const nextLesson = lesson < 19 ? String(lesson + 1).padStart(2, '0') : null;
+const nextLesson = lesson < 22 ? String(lesson + 1).padStart(2, '0') : null;
 const lessonPadded = String(lesson).padStart(2, '0');
 ---
 
