@@ -39,6 +39,11 @@ const sortedLessons = lessons.sort((a, b) => a.data.lesson - b.data.lesson);
         細かい書き方は忘れてOK。「ああ、これ見たことあるな」くらいで十分です。<br />
         それだけで、AIとの協働が驚くほどスムーズになります。
       </p>
+      <div class="ai-tip">
+        <strong>💡 ヒント:</strong> 各レッスンの最初に「AIに質問するときはここをクリック」というボタンがあります。<br />
+        わからないことがあったら、そこに用意されたフォーマットをコピーしてChatGPTやClaudeに貼り付けてください。<br />
+        あなたの学習状況に合わせた回答がもらえます。
+      </div>
     </div>
   </section>
 
@@ -129,6 +134,21 @@ const sortedLessons = lessons.sort((a, b) => a.data.lesson - b.data.lesson);
     background-color: rgba(255,255,255,0.5);
     padding: 0.1rem 0.3rem;
     border-radius: 4px;
+  }
+
+  .ai-tip {
+    margin-top: 1.5rem;
+    padding: 1rem;
+    background-color: rgba(255,255,255,0.7);
+    border-radius: 8px;
+    border-left: 4px solid #f59e0b;
+    font-size: 0.95rem;
+    line-height: 1.8;
+  }
+
+  .ai-tip strong {
+    color: #d97706;
+    background-color: transparent;
   }
 
   .lessons h2 {
