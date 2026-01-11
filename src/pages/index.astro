@@ -107,6 +107,57 @@ const sortedLessons = lessons.sort((a, b) => a.data.lesson - b.data.lesson);
     </div>
   </section>
 
+  <section class="roadmap">
+    <h2>全体の流れ</h2>
+    <p class="roadmap-intro">全18回を5つのステージに分けて進めます。今どこにいるか確認しながら進もう！</p>
+    <div class="roadmap-stages">
+      <div class="roadmap-stage">
+        <div class="stage-header stage-1">
+          <span class="stage-number">Stage 1</span>
+          <span class="stage-title">環境構築</span>
+        </div>
+        <div class="stage-lessons">第1〜3回</div>
+        <div class="stage-desc">VSCode、ターミナル、Node.jsをセットアップ</div>
+      </div>
+      <div class="roadmap-arrow">→</div>
+      <div class="roadmap-stage">
+        <div class="stage-header stage-2">
+          <span class="stage-number">Stage 2</span>
+          <span class="stage-title">見た目を作る</span>
+        </div>
+        <div class="stage-lessons">第4〜6回</div>
+        <div class="stage-desc">HTML/CSSでWebページを作成<br /><small>🎯 作品①：自己紹介ページ</small></div>
+      </div>
+      <div class="roadmap-arrow">→</div>
+      <div class="roadmap-stage">
+        <div class="stage-header stage-3">
+          <span class="stage-number">Stage 3</span>
+          <span class="stage-title">ロジックを学ぶ</span>
+        </div>
+        <div class="stage-lessons">第7〜11回</div>
+        <div class="stage-desc">TypeScriptの基本文法<br /><small>🎯 作品②：じゃんけんゲーム</small></div>
+      </div>
+      <div class="roadmap-arrow">→</div>
+      <div class="roadmap-stage">
+        <div class="stage-header stage-4">
+          <span class="stage-number">Stage 4</span>
+          <span class="stage-title">ブラウザで動かす</span>
+        </div>
+        <div class="stage-lessons">第12〜15回</div>
+        <div class="stage-desc">DOM操作、イベント処理<br /><small>🎯 作品③：クイズゲーム</small></div>
+      </div>
+      <div class="roadmap-arrow">→</div>
+      <div class="roadmap-stage">
+        <div class="stage-header stage-5">
+          <span class="stage-number">Stage 5</span>
+          <span class="stage-title">Reactで開発</span>
+        </div>
+        <div class="stage-lessons">第16〜18回</div>
+        <div class="stage-desc">モダンなフレームワーク<br /><small>🎯 最終作品：診断ゲーム</small></div>
+      </div>
+    </div>
+  </section>
+
   <section class="lessons">
     <h2>カリキュラム</h2>
     <div class="lesson-grid">
@@ -415,5 +466,106 @@ const sortedLessons = lessons.sort((a, b) => a.data.lesson - b.data.lesson);
     font-size: 0.9rem;
     color: #64748b;
     line-height: 1.6;
+  }
+
+  .roadmap {
+    background-color: #f8fafc;
+    border-radius: 12px;
+    padding: 2rem;
+    margin-bottom: 2rem;
+  }
+
+  .roadmap h2 {
+    text-align: center;
+    margin-top: 0;
+    margin-bottom: 0.5rem;
+    border-left: none;
+    padding-left: 0;
+  }
+
+  .roadmap-intro {
+    text-align: center;
+    color: #64748b;
+    margin-bottom: 1.5rem;
+  }
+
+  .roadmap-stages {
+    display: flex;
+    justify-content: center;
+    align-items: flex-start;
+    gap: 0.5rem;
+    flex-wrap: wrap;
+  }
+
+  .roadmap-stage {
+    background-color: white;
+    border-radius: 8px;
+    padding: 1rem;
+    min-width: 140px;
+    max-width: 160px;
+    box-shadow: 0 1px 3px rgba(0,0,0,0.1);
+    text-align: center;
+  }
+
+  .stage-header {
+    padding: 0.5rem;
+    border-radius: 6px;
+    margin-bottom: 0.5rem;
+  }
+
+  .stage-1 { background-color: #dbeafe; }
+  .stage-2 { background-color: #dcfce7; }
+  .stage-3 { background-color: #fef3c7; }
+  .stage-4 { background-color: #fce7f3; }
+  .stage-5 { background-color: #e0e7ff; }
+
+  .stage-number {
+    display: block;
+    font-size: 0.75rem;
+    font-weight: bold;
+    color: #64748b;
+  }
+
+  .stage-title {
+    display: block;
+    font-weight: bold;
+    font-size: 0.9rem;
+    color: #1e293b;
+  }
+
+  .stage-lessons {
+    font-size: 0.8rem;
+    color: #64748b;
+    margin-bottom: 0.25rem;
+  }
+
+  .stage-desc {
+    font-size: 0.75rem;
+    color: #475569;
+    line-height: 1.4;
+  }
+
+  .stage-desc small {
+    color: #2563eb;
+    font-weight: 500;
+  }
+
+  .roadmap-arrow {
+    font-size: 1.25rem;
+    color: #94a3b8;
+    align-self: center;
+  }
+
+  @media (max-width: 768px) {
+    .roadmap-stages {
+      flex-direction: column;
+      align-items: center;
+    }
+    .roadmap-arrow {
+      transform: rotate(90deg);
+    }
+    .roadmap-stage {
+      max-width: 200px;
+    }
   }
 </style>
