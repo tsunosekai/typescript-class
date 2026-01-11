@@ -19,21 +19,25 @@ const sortedLessons = lessons.sort((a, b) => a.data.lesson - b.data.lesson);
   <section class="motivation">
     <h2>この講座について</h2>
     <div class="motivation-content">
-      <p>
-        「今どきAIがコードを書いてくれるんだから、プログラミングなんて学ばなくていいんじゃない？」
+      <p class="main-message">
+        この講座は、<strong>完璧に覚えなくていい</strong>講座です。
       </p>
       <p>
-        確かに、Claude CodeやGitHub Copilotを使えば、コードは自動生成できます。<br />
-        でも、<strong>基礎を知らないとAIツールも使いこなせない</strong>のが現実です。
+        今の時代、Claude CodeやGitHub Copilotを使えば、AIがコードを書いてくれます。<br />
+        だから、プログラミングの文法を暗記する必要はありません。
       </p>
       <p>
-        「変数って何？」「関数って何？」がわからないと、AIが生成したコードの意味がわからない。<br />
-        エラーが出ても、何が間違っているのか判断できない。<br />
-        結局、AIに「いい感じにして」と言い続けるだけになってしまいます。
+        ただ、<strong>「こういう概念があるんだな」を知っているかどうか</strong>で、AIの使いこなし度が大きく変わります。
       </p>
       <p>
-        この講座は、<strong>AIと一緒にコードを書くための「共通言語」</strong>を身につけることを目指しています。<br />
-        完璧に覚える必要はありません。「こういう概念があるんだな」と知っているだけで、AIとのやり取りがスムーズになります。
+        「変数」「関数」「配列」という言葉を知らないと、AIに何をお願いすればいいかわからない。<br />
+        AIが書いたコードを見ても、何が起きているか想像できない。<br />
+        エラーが出ても、どこがおかしいか見当もつかない。
+      </p>
+      <p>
+        この講座で身につけるのは、<strong>AIと会話するための「共通言語」</strong>です。<br />
+        細かい書き方は忘れてOK。「ああ、これ見たことあるな」くらいで十分です。<br />
+        それだけで、AIとの協働が驚くほどスムーズになります。
       </p>
     </div>
   </section>
@@ -104,11 +108,20 @@ const sortedLessons = lessons.sort((a, b) => a.data.lesson - b.data.lesson);
     line-height: 1.9;
   }
 
-  .motivation-content p:first-child {
-    font-size: 1.1rem;
-    font-weight: 500;
+  .motivation-content .main-message {
+    font-size: 1.3rem;
+    font-weight: 600;
     text-align: center;
     margin-bottom: 1.5rem;
+    padding: 1rem;
+    background-color: rgba(255,255,255,0.6);
+    border-radius: 8px;
+  }
+
+  .motivation-content .main-message strong {
+    font-size: 1.5rem;
+    color: #dc2626;
+    background-color: transparent;
   }
 
   .motivation-content strong {
