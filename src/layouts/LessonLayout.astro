@@ -9,6 +9,7 @@ interface Props {
 const { title, lesson } = Astro.props;
 const prevLesson = lesson > 1 ? String(lesson - 1).padStart(2, '0') : null;
 const nextLesson = lesson < 18 ? String(lesson + 1).padStart(2, '0') : null;
+const lessonPadded = String(lesson).padStart(2, '0');
 ---
 
 <BaseLayout title={`第${lesson}回: ${title}`}>
@@ -91,4 +92,50 @@ const nextLesson = lesson < 18 ? String(lesson + 1).padStart(2, '0') : null;
   .nav-home:hover {
     background-color: #1d4ed8 !important;
   }
+
+  .screenshot-request {
+    display: block;
+    margin-top: 0.5rem;
+    margin-bottom: 1rem;
+    padding: 0.5rem 1rem;
+    background-color: #fef3c7;
+    border: 1px dashed #f59e0b;
+    border-radius: 6px;
+    font-size: 0.85rem;
+    color: #92400e;
+    text-decoration: none;
+    text-align: center;
+  }
+
+  .screenshot-request:hover {
+    background-color: #fde68a;
+  }
 </style>
+
+<script define:vars={{ lesson, lessonPadded }}>
+  document.querySelectorAll('.lesson-content img').forEach((img) => {
+    const src = img.getAttribute('src') || '';
+    if (src.includes('.svg')) {
+      const filename = src.split('/').pop()?.replace('.svg', '') || '';
+      const issueTitle = encodeURIComponent(`[スクショ] 第${lesson}回 - ${filename}`);
+      const issueBody = encodeURIComponent(`## 提供するスクリーンショット
+
+**ファイル名:** ${filename}
+
+**レッスン番号:** 第${lesson}回
+
+**スクリーンショット:**
+<!-- 画像をドラッグ＆ドロップで貼り付けてください -->
+
+
+## 備考
+`);
+      const link = document.createElement('a');
+      link.href = `https://github.com/tsunosekai/typescript-class/issues/new?title=${issueTitle}&body=${issueBody}&labels=screenshot`;
+      link.className = 'screenshot-request';
+      link.target = '_blank';
+      link.textContent = `📸 この画像を提供する (${filename})`;
+      img.parentNode?.insertBefore(link, img.nextSibling);
+    }
+  });
+</script>
