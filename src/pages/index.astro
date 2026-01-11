@@ -89,21 +89,29 @@ const sortedLessons = lessons.sort((a, b) => a.data.lesson - b.data.lesson);
     <h2>ご協力のお願い</h2>
     <div class="contribute-content">
       <p>この講座はまだ作成中です。以下のご協力をお待ちしています！</p>
-      <p class="contribute-note">※ AIで処理するので丁寧に書かなくて大丈夫です。意味が伝われば OK！</p>
 
       <div class="contribute-cards">
-        <a href="https://github.com/tsunosekai/typescript-class/issues/new?template=screenshot.md" class="contribute-card" target="_blank">
+        <div class="contribute-card">
           <span class="contribute-icon">📸</span>
           <span class="contribute-title">スクリーンショットの提供</span>
           <span class="contribute-desc">現在プレースホルダー画像になっている箇所の実際のスクリーンショットを募集しています</span>
-        </a>
+        </div>
 
-        <a href="https://github.com/tsunosekai/typescript-class/issues/new?template=feedback.md" class="contribute-card" target="_blank">
+        <div class="contribute-card">
           <span class="contribute-icon">💬</span>
           <span class="contribute-title">フィードバック</span>
           <span class="contribute-desc">わかりにくい箇所、間違っている箇所、改善案などを教えてください</span>
-        </a>
+        </div>
       </div>
+
+      <p class="contribute-instruction">
+        👉 <strong>各レッスンのページ</strong>に「フィードバックを送る」リンクがあります。<br />
+        気になる箇所を見つけたら、そのページから送っていただけると助かります！
+      </p>
+      <p class="contribute-note">
+        ※ GitHubアカウントが必要です（無料で作成できます）<br />
+        ※ AIで処理するので丁寧に書かなくて大丈夫です。意味が伝わればOK！
+      </p>
     </div>
   </section>
 
@@ -419,16 +427,11 @@ const sortedLessons = lessons.sort((a, b) => a.data.lesson - b.data.lesson);
     margin-bottom: 0.5rem;
   }
 
-  .contribute-note {
-    font-size: 0.9rem;
-    color: #94a3b8 !important;
-    margin-bottom: 1.5rem !important;
-  }
-
   .contribute-cards {
     display: grid;
     grid-template-columns: repeat(auto-fit, minmax(280px, 1fr));
     gap: 1rem;
+    margin-bottom: 1.5rem;
   }
 
   .contribute-card {
@@ -438,16 +441,29 @@ const sortedLessons = lessons.sort((a, b) => a.data.lesson - b.data.lesson);
     background-color: #f8fafc;
     border: 1px solid #e2e8f0;
     border-radius: 12px;
-    text-decoration: none;
     color: inherit;
-    transition: all 0.2s;
   }
 
-  .contribute-card:hover {
-    background-color: #f1f5f9;
-    border-color: #cbd5e1;
-    transform: translateY(-2px);
-    box-shadow: 0 4px 12px rgba(0,0,0,0.1);
+  .contribute-instruction {
+    text-align: center;
+    color: #1e40af;
+    background-color: #eff6ff;
+    padding: 1rem;
+    border-radius: 8px;
+    margin-bottom: 1rem !important;
+    line-height: 1.8;
+  }
+
+  .contribute-instruction strong {
+    color: #1e40af;
+  }
+
+  .contribute-note {
+    text-align: center;
+    font-size: 0.85rem;
+    color: #94a3b8 !important;
+    margin-bottom: 0 !important;
+    line-height: 1.8;
   }
 
   .contribute-icon {
