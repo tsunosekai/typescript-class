@@ -110,9 +110,27 @@ const lessonPadded = String(lesson).padStart(2, '0');
   .screenshot-request:hover {
     background-color: #fde68a;
   }
+
+  .feedback-link {
+    margin-left: 1rem;
+    padding: 0.2rem 0.6rem;
+    background-color: #f1f5f9;
+    border-radius: 4px;
+    font-size: 0.75rem;
+    font-weight: normal;
+    color: #64748b;
+    text-decoration: none;
+    vertical-align: middle;
+  }
+
+  .feedback-link:hover {
+    background-color: #e2e8f0;
+    color: #475569;
+  }
 </style>
 
 <script define:vars={{ lesson, lessonPadded }}>
+  // プレースホルダー画像の下にスクショ提供リンクを追加
   document.querySelectorAll('.lesson-content img').forEach((img) => {
     const src = img.getAttribute('src') || '';
     if (src.includes('.svg')) {
@@ -137,5 +155,32 @@ const lessonPadded = String(lesson).padStart(2, '0');
       link.textContent = `📸 この画像を提供する (${filename})`;
       img.parentNode?.insertBefore(link, img.nextSibling);
     }
+  });
+
+  // 各セクションにフィードバックリンクを追加
+  document.querySelectorAll('.lesson-content h2, .lesson-content h3').forEach((heading) => {
+    const sectionTitle = heading.textContent || '';
+    const issueTitle = encodeURIComponent(`[フィードバック] 第${lesson}回 - ${sectionTitle}`);
+    const issueBody = encodeURIComponent(`## 該当箇所
+
+**レッスン番号:** 第${lesson}回
+
+**セクション:** ${sectionTitle}
+
+## 内容
+
+### どこがわかりにくい/間違っている？
+<!-- 具体的に教えてください -->
+
+
+### どうすればわかりやすくなる？（任意）
+<!-- 改善案があれば -->
+`);
+    const link = document.createElement('a');
+    link.href = `https://github.com/tsunosekai/typescript-class/issues/new?title=${issueTitle}&body=${issueBody}&labels=feedback`;
+    link.className = 'feedback-link';
+    link.target = '_blank';
+    link.textContent = '💬 わかりにくい点を報告';
+    heading.appendChild(link);
   });
 </script>
