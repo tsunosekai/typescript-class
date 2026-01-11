@@ -51,6 +51,7 @@ const sortedLessons = lessons.sort((a, b) => a.data.lesson - b.data.lesson);
     <h2>ご協力のお願い</h2>
     <div class="contribute-content">
       <p>この講座はまだ作成中です。以下のご協力をお待ちしています！</p>
+      <p class="contribute-note">※ AIで処理するので丁寧に書かなくて大丈夫です。意味が伝われば OK！</p>
 
       <div class="contribute-cards">
         <a href="https://github.com/tsunosekai/typescript-class/issues/new?template=screenshot.md" class="contribute-card" target="_blank">
@@ -229,7 +230,13 @@ const sortedLessons = lessons.sort((a, b) => a.data.lesson - b.data.lesson);
   .contribute-content > p {
     text-align: center;
     color: #64748b;
-    margin-bottom: 1.5rem;
+    margin-bottom: 0.5rem;
+  }
+
+  .contribute-note {
+    font-size: 0.9rem;
+    color: #94a3b8 !important;
+    margin-bottom: 1.5rem !important;
   }
 
   .contribute-cards {
