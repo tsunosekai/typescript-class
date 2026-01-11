@@ -23,7 +23,7 @@ const sortedLessons = lessons.sort((a, b) => a.data.lesson - b.data.lesson);
         この講座は、<strong>完璧に覚えなくていい</strong>講座です。
       </p>
       <p>
-        今の時代、Claude CodeやGitHub Copilotを使えば、AIがコードを書いてくれます。<br />
+        今の時代、AIがコードを書いてくれるツール（Claude CodeやGitHub Copilotなど）があります。<br />
         だから、プログラミングの文法を暗記する必要はありません。
       </p>
       <p>
@@ -40,11 +40,49 @@ const sortedLessons = lessons.sort((a, b) => a.data.lesson - b.data.lesson);
         それだけで、AIとの協働が驚くほどスムーズになります。
       </p>
       <div class="ai-tip">
-        <strong>💡 ヒント:</strong> 各レッスンの最初に「AIに質問するときはここをクリック」というボタンがあります。<br />
-        わからないことがあったら、そこに用意されたフォーマットをコピーしてChatGPTやClaudeに貼り付けてください。<br />
-        あなたの学習状況に合わせた回答がもらえます。
+        <strong>💡 わからないときはAIに聞こう:</strong> 各レッスンの最初に「AIに質問するときはここをクリック」というボタンがあります。<br />
+        クリックすると、こんなテンプレートが出てきます：
+        <details class="ai-sample">
+          <summary>サンプルを見る</summary>
+          <pre>【TypeScript講座 学習状況】
+現在地: 第7回「データを入れる箱を使おう」
+
+■ 学習済みの内容:
+- VSCode、ターミナルの使い方
+- HTML/CSSの基本
+...
+
+【質問】
+ここに質問を書いてね</pre>
+        </details>
+        これをコピーしてChatGPTやClaudeに貼り付ければ、あなたの学習状況に合わせた回答がもらえます。
       </div>
     </div>
+  </section>
+
+  <section class="why-order">
+    <h2>なぜこの順番で学ぶの？</h2>
+    <p class="why-order-intro">「TypeScript講座なのに、なぜHTML/CSSから？」と思うかもしれません。</p>
+    <div class="web-elements">
+      <div class="web-element">
+        <span class="element-icon">🦴</span>
+        <span class="element-name">HTML</span>
+        <span class="element-desc">ページの骨組み<br /><small>文字や画像を置く場所を決める</small></span>
+      </div>
+      <div class="web-element-arrow">→</div>
+      <div class="web-element">
+        <span class="element-icon">🎨</span>
+        <span class="element-name">CSS</span>
+        <span class="element-desc">見た目の装飾<br /><small>色・サイズ・配置を整える</small></span>
+      </div>
+      <div class="web-element-arrow">→</div>
+      <div class="web-element">
+        <span class="element-icon">⚡</span>
+        <span class="element-name">TypeScript</span>
+        <span class="element-desc">動きをつける<br /><small>ボタンを押したら何か起きる</small></span>
+      </div>
+    </div>
+    <p class="why-order-conclusion">TypeScriptだけではページに何も表示できません。<br />まず「器」を作ってから「動き」を加えます。</p>
   </section>
 
   <section class="contribute">
@@ -171,6 +209,103 @@ const sortedLessons = lessons.sort((a, b) => a.data.lesson - b.data.lesson);
   .ai-tip strong {
     color: #d97706;
     background-color: transparent;
+  }
+
+  .ai-sample {
+    margin-top: 0.75rem;
+    background-color: rgba(255,255,255,0.5);
+    border-radius: 6px;
+    padding: 0.5rem;
+  }
+
+  .ai-sample summary {
+    cursor: pointer;
+    color: #92400e;
+    font-size: 0.9rem;
+  }
+
+  .ai-sample pre {
+    margin-top: 0.5rem;
+    padding: 0.75rem;
+    background-color: #1e293b;
+    color: #e2e8f0;
+    border-radius: 6px;
+    font-size: 0.8rem;
+    overflow-x: auto;
+    white-space: pre-wrap;
+  }
+
+  .why-order {
+    background-color: #eff6ff;
+    border-radius: 12px;
+    padding: 2rem;
+    margin-bottom: 2rem;
+    text-align: center;
+  }
+
+  .why-order h2 {
+    color: #1e40af;
+    margin-top: 0;
+    margin-bottom: 0.5rem;
+    border-left: none;
+    padding-left: 0;
+  }
+
+  .why-order-intro {
+    color: #3b82f6;
+    margin-bottom: 1.5rem;
+  }
+
+  .web-elements {
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    gap: 0.5rem;
+    flex-wrap: wrap;
+    margin-bottom: 1.5rem;
+  }
+
+  .web-element {
+    background-color: white;
+    border-radius: 12px;
+    padding: 1rem 1.5rem;
+    box-shadow: 0 2px 8px rgba(0,0,0,0.1);
+    min-width: 140px;
+  }
+
+  .element-icon {
+    display: block;
+    font-size: 2rem;
+    margin-bottom: 0.5rem;
+  }
+
+  .element-name {
+    display: block;
+    font-weight: bold;
+    color: #1e40af;
+    margin-bottom: 0.25rem;
+  }
+
+  .element-desc {
+    display: block;
+    font-size: 0.85rem;
+    color: #64748b;
+    line-height: 1.4;
+  }
+
+  .element-desc small {
+    color: #94a3b8;
+  }
+
+  .web-element-arrow {
+    font-size: 1.5rem;
+    color: #3b82f6;
+  }
+
+  .why-order-conclusion {
+    color: #1e40af;
+    font-weight: 500;
+    margin-bottom: 0;
   }
 
   .lessons h2 {

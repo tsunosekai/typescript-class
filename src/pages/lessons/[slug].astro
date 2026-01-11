@@ -14,6 +14,12 @@ const { lesson } = Astro.props;
 const { Content } = await lesson.render();
 ---
 
-<LessonLayout title={lesson.data.title} lesson={lesson.data.lesson}>
+<LessonLayout
+  title={lesson.data.title}
+  lesson={lesson.data.lesson}
+  goal={lesson.data.goal}
+  time={lesson.data.time}
+  checklist={lesson.data.checklist}
+>
   <Content />
 </LessonLayout>

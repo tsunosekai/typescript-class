@@ -5,6 +5,9 @@ const lessonsCollection = defineCollection({
   schema: z.object({
     title: z.string(),
     lesson: z.number(),
+    goal: z.string().optional(),
+    time: z.string().optional(),
+    checklist: z.array(z.string()).optional(),
   }),
 });
 
