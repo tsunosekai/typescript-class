@@ -1,6 +1,7 @@
 {
   "$schema": "node_modules/wrangler/config-schema.json",
   "name": "typescript-class",
+  "account_id": "d3718565357dc8794386fe4aa0978962",
   "compatibility_date": "2025-01-01",
   "assets": {
     "directory": "./dist"

@@ -95,7 +95,19 @@ npm run dev
 
 ## デプロイ
 
-Cloudflare Pagesにデプロイ予定です。
+Cloudflare Workersにデプロイしています。
+
+```bash
+# ビルド
+npm run build
+
+# デプロイ（要wranglerログイン）
+npx wrangler deploy
+```
+
+初回は `npx wrangler login` でCloudflareにログインが必要です。
+
+**本番URL:** https://typescript-class.tsunosekai.workers.dev
 
 ## ライセンス
 
