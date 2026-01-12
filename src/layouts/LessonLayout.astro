@@ -337,6 +337,15 @@ const lessonPadded = String(lesson).padStart(2, '0');
   }
 
   initMermaid();
+
+  // 外部リンクを別タブで開く
+  document.querySelectorAll('.lesson-content a').forEach((link) => {
+    const href = link.getAttribute('href');
+    if (href && (href.startsWith('http://') || href.startsWith('https://'))) {
+      link.setAttribute('target', '_blank');
+      link.setAttribute('rel', 'noopener noreferrer');
+    }
+  });
 </script>
 
 <style is:global>
