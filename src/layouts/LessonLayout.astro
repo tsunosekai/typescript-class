@@ -11,7 +11,7 @@ interface Props {
 
 const { title, lesson, goal, time, checklist } = Astro.props;
 const prevLesson = lesson > 1 ? String(lesson - 1).padStart(2, '0') : null;
-const nextLesson = lesson < 22 ? String(lesson + 1).padStart(2, '0') : null;
+const nextLesson = lesson < 23 ? String(lesson + 1).padStart(2, '0') : null;
 const lessonPadded = String(lesson).padStart(2, '0');
 ---
 
@@ -265,3 +265,36 @@ const lessonPadded = String(lesson).padStart(2, '0');
     hr.parentNode?.insertBefore(wrapper, hr);
   });
 </script>
+
+<script>
+  import mermaid from 'mermaid';
+
+  mermaid.initialize({
+    startOnLoad: false,
+    theme: 'default',
+    securityLevel: 'loose',
+  });
+
+  // mermaidコードブロックを探してレンダリング
+  document.querySelectorAll('pre code').forEach(async (block) => {
+    const text = block.textContent || '';
+    if (text.trim().startsWith('flowchart') || text.trim().startsWith('graph') || text.trim().startsWith('sequenceDiagram') || text.trim().startsWith('classDiagram') || text.trim().startsWith('stateDiagram') || text.trim().startsWith('erDiagram') || text.trim().startsWith('journey') || text.trim().startsWith('gantt') || text.trim().startsWith('pie') || text.trim().startsWith('mindmap')) {
+      const pre = block.parentElement;
+      if (pre) {
+        const container = document.createElement('div');
+        container.className = 'mermaid';
+        container.textContent = text;
+        pre.replaceWith(container);
+      }
+    }
+  });
+
+  await mermaid.run();
+</script>
+
+<style is:global>
+  .mermaid {
+    text-align: center;
+    margin: 1.5rem 0;
+  }
+</style>
