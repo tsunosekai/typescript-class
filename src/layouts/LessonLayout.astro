@@ -269,32 +269,139 @@ const lessonPadded = String(lesson).padStart(2, '0');
 <script>
   import mermaid from 'mermaid';
 
+  // ライトボックス機能
+  const lightbox = document.createElement('div');
+  lightbox.className = 'lightbox';
+  lightbox.innerHTML = `
+    <span class="lightbox-close">&times;</span>
+    <div class="lightbox-content"></div>
+    <span class="lightbox-hint">クリックで閉じる</span>
+  `;
+  document.body.appendChild(lightbox);
+
+  const lightboxContent = lightbox.querySelector('.lightbox-content')!;
+
+  function openLightbox(content: string) {
+    lightboxContent.innerHTML = content;
+    lightbox.classList.add('active');
+    document.body.style.overflow = 'hidden';
+  }
+
+  function closeLightbox() {
+    lightbox.classList.remove('active');
+    document.body.style.overflow = '';
+  }
+
+  lightbox.addEventListener('click', closeLightbox);
+  lightboxContent.addEventListener('click', (e) => e.stopPropagation());
+
+  document.addEventListener('keydown', (e) => {
+    if (e.key === 'Escape') closeLightbox();
+  });
+
+  // 画像クリックで拡大
+  document.querySelectorAll('.lesson-content img').forEach((img) => {
+    img.addEventListener('click', () => {
+      openLightbox(`<img src="${img.getAttribute('src')}" alt="${img.getAttribute('alt') || ''}">`);
+    });
+  });
+
+  // Mermaid初期化
   mermaid.initialize({
     startOnLoad: false,
     theme: 'default',
     securityLevel: 'loose',
   });
 
-  // mermaidコードブロックを探してレンダリング
-  document.querySelectorAll('pre code').forEach(async (block) => {
-    const text = block.textContent || '';
-    if (text.trim().startsWith('flowchart') || text.trim().startsWith('graph') || text.trim().startsWith('sequenceDiagram') || text.trim().startsWith('classDiagram') || text.trim().startsWith('stateDiagram') || text.trim().startsWith('erDiagram') || text.trim().startsWith('journey') || text.trim().startsWith('gantt') || text.trim().startsWith('pie') || text.trim().startsWith('mindmap')) {
-      const pre = block.parentElement;
-      if (pre) {
-        const container = document.createElement('div');
-        container.className = 'mermaid';
-        container.textContent = text;
-        pre.replaceWith(container);
-      }
+  // data-language="mermaid" を持つ pre 要素を探してレンダリング
+  document.querySelectorAll('pre[data-language="mermaid"]').forEach((pre) => {
+    const code = pre.querySelector('code');
+    if (code) {
+      const text = code.textContent || '';
+      const container = document.createElement('div');
+      container.className = 'mermaid';
+      container.textContent = text;
+      pre.replaceWith(container);
     }
   });
 
   await mermaid.run();
+
+  // Mermaidレンダリング後にクリックイベントを設定
+  document.querySelectorAll('.mermaid').forEach((el) => {
+    el.addEventListener('click', () => {
+      openLightbox(el.innerHTML);
+    });
+  });
 </script>
 
 <style is:global>
   .mermaid {
     text-align: center;
     margin: 1.5rem 0;
+    cursor: pointer;
+  }
+
+  .lesson-content img {
+    cursor: pointer;
+  }
+
+  /* ライトボックス */
+  .lightbox {
+    display: none;
+    position: fixed;
+    top: 0;
+    left: 0;
+    width: 100%;
+    height: 100%;
+    background-color: rgba(0, 0, 0, 0.9);
+    z-index: 1000;
+    justify-content: center;
+    align-items: center;
+    cursor: pointer;
+  }
+
+  .lightbox.active {
+    display: flex;
+  }
+
+  .lightbox-content {
+    max-width: 95vw;
+    max-height: 90vh;
+    min-width: 80vw;
+    overflow: auto;
+    background-color: white;
+    border-radius: 8px;
+    padding: 2rem;
+  }
+
+  .lightbox-content img {
+    width: 100%;
+    height: auto;
+  }
+
+  .lightbox-content svg {
+    width: 100%;
+    height: auto;
+    min-height: 60vh;
+  }
+
+  .lightbox-close {
+    position: fixed;
+    top: 1rem;
+    right: 1rem;
+    color: white;
+    font-size: 2rem;
+    cursor: pointer;
+    z-index: 1001;
+  }
+
+  .lightbox-hint {
+    position: absolute;
+    bottom: 1rem;
+    left: 50%;
+    transform: translateX(-50%);
+    color: rgba(255, 255, 255, 0.7);
+    font-size: 0.875rem;
   }
 </style>
