@@ -306,33 +306,37 @@ const lessonPadded = String(lesson).padStart(2, '0');
     });
   });
 
-  // Mermaid初期化
-  mermaid.initialize({
-    startOnLoad: false,
-    theme: 'default',
-    securityLevel: 'loose',
-  });
-
-  // data-language="mermaid" を持つ pre 要素を探してレンダリング
-  document.querySelectorAll('pre[data-language="mermaid"]').forEach((pre) => {
-    const code = pre.querySelector('code');
-    if (code) {
-      const text = code.textContent || '';
-      const container = document.createElement('div');
-      container.className = 'mermaid';
-      container.textContent = text;
-      pre.replaceWith(container);
-    }
-  });
-
-  await mermaid.run();
-
-  // Mermaidレンダリング後にクリックイベントを設定
-  document.querySelectorAll('.mermaid').forEach((el) => {
-    el.addEventListener('click', () => {
-      openLightbox(el.innerHTML);
+  // Mermaid初期化・レンダリング
+  async function initMermaid() {
+    mermaid.initialize({
+      startOnLoad: false,
+      theme: 'default',
+      securityLevel: 'loose',
     });
-  });
+
+    // data-language="mermaid" を持つ pre 要素を探してレンダリング
+    document.querySelectorAll('pre[data-language="mermaid"]').forEach((pre) => {
+      const code = pre.querySelector('code');
+      if (code) {
+        const text = code.textContent || '';
+        const container = document.createElement('div');
+        container.className = 'mermaid';
+        container.textContent = text;
+        pre.replaceWith(container);
+      }
+    });
+
+    await mermaid.run();
+
+    // Mermaidレンダリング後にクリックイベントを設定
+    document.querySelectorAll('.mermaid').forEach((el) => {
+      el.addEventListener('click', () => {
+        openLightbox(el.innerHTML);
+      });
+    });
+  }
+
+  initMermaid();
 </script>
 
 <style is:global>
