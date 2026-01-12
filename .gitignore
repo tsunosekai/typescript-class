@@ -23,3 +23,6 @@ pnpm-debug.log*
 # jetbrains setting folder
 .idea/
 typescript-course-review.md
+
+# claude temp files
+tmpclaude-*
